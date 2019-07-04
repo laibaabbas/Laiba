@@ -1,10 +1,10 @@
 var ExtractTextPlugin=require("extract-text-webpack-plugin")
 module.exports={
-    entry:[ `${__dirname}/src/js/index.jsx`,`${__dirname}/src/css/style.css`],
+    entry:[ `${__dirname}/src/js/index.jsx`,`${__dirname}/src/css/style.scss`],
     output:{
         path:`${__dirname}/dist/js`,
         filename:"bundle.js",
-        publicPath:"./dist"
+        publicPath:"js"
     },
 
     module:{
@@ -44,7 +44,20 @@ module.exports={
                
                 ]
             })
-        }
+        },
+        {
+            test: /\.scss$/,
+            use: [
+              "style-loader",
+              {
+                loader: "css-loader",
+                options: {
+                  url: false
+                }
+              },
+              "sass-loader"
+            ]
+          }
     ]
     },
     devServer: {
